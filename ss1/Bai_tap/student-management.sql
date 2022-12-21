@@ -23,8 +23,3 @@ CREATE TABLE `teacher` (
   `country` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idTeacher`)
 ) 
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy

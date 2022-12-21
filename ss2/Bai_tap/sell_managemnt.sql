@@ -22,7 +22,7 @@ create table orders_detail(
 	oId int ,
     pId int ,
     primary key(oId,pId),
-    odQTY int,
+    odQTY int,	
     CONSTRAINT fk_oId FOREIGN key (oId) REFERENCES orders(oId),
 	CONSTRAINT fk_pId FOREIGN key (pId) REFERENCES product(pId)
 );
