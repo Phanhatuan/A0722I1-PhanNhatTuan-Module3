@@ -19,5 +19,6 @@ use quanlysinhvien;
 -- Hiển thị các thông tin: StudentName, SubName, Mark. Dữ liệu sắp xếp theo điểm thi (mark) giảm dần. nếu trùng sắp theo tên tăng dần.
 select  student.StudentName, subject.SubName, mark.Mark
 from (student inner join mark on mark.StudentId= student.StudentId)
-inner join subject on mark.SubId = subject.SubId;
+inner join subject on mark.SubId = subject.SubId
+order by mark.Mark desc, student.StudentName;
 select * from mark;
