@@ -84,3 +84,42 @@ from dich_vu_di_kem
 join hop_dong_chi_tiet using(ma_dich_vu_di_kem)
 group by ma_dich_vu_di_kem) 
 SELECT * from temp1 where SL = (select max(SL) from temp1);
+-- 14.	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. Thông tin hiển thị bao gồm ma_hop_dong, ten_loai_dich_vu, ten_dich_vu_di_kem, so_lan_su_dung (được tính dựa trên việc count các ma_dich_vu_di_kem).
+SELECT
+		ma_hop_dong,
+		ten_loai_dich_vu,
+        ten_dich_vu_di_kem,
+        count(ma_dich_vu_di_kem) so_lan_dung_dvdk
+FROM
+        dich_vu_di_kem
+        JOIN hop_dong_chi_tiet USING(ma_dich_vu_di_kem)
+        JOIN hop_dong USING (ma_hop_dong)
+        JOIN dich_vu USING (ma_dich_vu)
+        JOIN loai_dich_vu USING (ma_loai_dich_vu)
+GROUP by
+        ma_dich_vu_di_kem
+HAVING so_lan_dung_dvdk = 1;
+-- 15.	Hiển thi thông tin của tất cả nhân viên bao gồm ma_nhan_vien, ho_ten, ten_trinh_do, ten_bo_phan, so_dien_thoai, dia_chi mới chỉ lập được tối đa 3 hợp đồng từ năm 2020 đến 2021.
+select ma_nhan_vien, ho_ten, ten_trinh_do, ten_bo_phan, so_dien_thoai, dia_chi, count(hop_dong.ma_nhan_vien) as so_luong
+from nhan_vien
+join trinh_do using(ma_trinh_do)
+join bo_phan using (ma_bo_phan)
+join hop_dong using(ma_nhan_vien)
+where year(ngay_lam_hop_dong) between 2020 and 2021
+group by ma_nhan_vien
+having so_luong <= 3;
+-- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
+delete from nhan_vien 
+where not exists (select * from hop_dong where ma_nhan_vien=nhan_vien.ma_nhan_vien and year(ngay_lam_hop_dong) between 2019 and 2021);
+-- 17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond, chỉ cập nhật những khách hàng đã từng đặt phòng với Tổng Tiền thanh toán trong năm 2021 là lớn hơn 10.000.000 VNĐ.
+-- 18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).
+delete from khach_hang
+where exists (select * from hop_dong where ma_khach_hang=hop_dong.ma_khach_hang and year(ngay_lam_hop_dong) < 2021);
+
+-- 19.	Cập nhật giá cho các dịch vụ đi kèm được sử dụng trên 10 lần trong năm 2020 lên gấp đôi.
+with temp2 as (select ma_dich_vu_di_kem, sum(so_luong) as sl from hop_dong_chi_tiet group by ma_dich_vu_di_kem having sl > 10)
+update dich_vu_di_kem
+set gia = gia*2
+where ma_dich_vu_di_kem in (select ma_dich_vu_di_kem from temp2);
+
+select * from dich_vu_di_kem;
