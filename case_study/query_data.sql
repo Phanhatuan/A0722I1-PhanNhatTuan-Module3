@@ -121,5 +121,9 @@ with temp2 as (select ma_dich_vu_di_kem, sum(so_luong) as sl from hop_dong_chi_t
 update dich_vu_di_kem
 set gia = gia*2
 where ma_dich_vu_di_kem in (select ma_dich_vu_di_kem from temp2);
-
-select * from dich_vu_di_kem;
+-- 20.	Hiển thị thông tin của tất cả các nhân viên và khách hàng có trong hệ thống, thông tin hiển thị bao gồm id (ma_nhan_vien, ma_khach_hang), ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi.
+select ma_khach_hang, ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi
+from khach_hang
+union all
+select ma_nhan_vien, ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi
+from nhan_vien
