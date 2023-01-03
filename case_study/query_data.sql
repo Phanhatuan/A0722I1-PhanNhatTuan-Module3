@@ -86,9 +86,9 @@ group by ma_dich_vu_di_kem)
 SELECT * from temp1 where SL = (select max(SL) from temp1);
 -- 14.	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. Thông tin hiển thị bao gồm ma_hop_dong, ten_loai_dich_vu, ten_dich_vu_di_kem, so_lan_su_dung (được tính dựa trên việc count các ma_dich_vu_di_kem).
 SELECT
-		ma_hop_dong,
-		ten_loai_dich_vu,
-        ten_dich_vu_di_kem,
+		hop_dong.ma_hop_dong,
+		loai_dich_vu.ten_loai_dich_vu,
+        dich_vu_di_kem.ten_dich_vu_di_kem,
         count(ma_dich_vu_di_kem) so_lan_dung_dvdk
 FROM
         dich_vu_di_kem
@@ -126,4 +126,4 @@ select ma_khach_hang, ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi
 from khach_hang
 union all
 select ma_nhan_vien, ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi
-from nhan_vien
+from nhan_vien;
