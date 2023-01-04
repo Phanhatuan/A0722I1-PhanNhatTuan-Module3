@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .content-default{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-transform: uppercase;
+        }
+        header,nav,footer{
+            height: 100px;
+            background: grey;
+        }
+        nav,footer {
+            margin-top: 20px;
+        }
+        .content{
+            display: flex;
+        }
+        .sub-content{
+            width: 50%;
+        }
+        section,article,aside {
+            display: inline-block;
+        }
+        section,article{
+            width: 100%;
+            height: 100px;
+            background: grey;
+            margin-top: 20px;
+        }
+        aside{
+            width: 50%;
+            height: 220px;
+            background: grey;
+            margin-top: 20px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header class="content-default"> <h1>This is header </h1></header>
+    <nav class="content-default"> <h1>This is navigation  </h1></nav>
+    <div class="content">
+        <div class = "sub-content">
+            <section class="content-default"><h2>This is section</h2></section>
+            <article class="content-default"> <h2>This is article</h2></article>
+        </div>
+        <aside class="content-default"><h2>This is aside</h2></aside>
+    </div>
+    <footer class="content-default"><h1>This is footer</h1></footer>
+</body>
+</html>

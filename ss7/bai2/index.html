@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .content-default{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-transform: uppercase;
+        }
+        header{
+            position: fixed;
+            width: 100%;
+        }
+
+        header,nav,footer{
+            height: 100px;
+            background: grey;
+        }
+        nav,footer {
+            margin-top: 20px;
+        }
+        .content{
+            display: flex;
+        }
+        .sub-content{
+            width: 25%;
+        }
+        .container {
+            padding-top: 100px;
+        }
+        section,article,aside {
+            display: inline-block;
+        }
+        section,article{
+            width: 100%;
+            height: 100px;
+            background: grey;
+            margin-top: 20px;
+        }
+        aside{
+            width: 25%;
+            height: 220px;
+            background: grey;
+            margin-top: 20px;
+        }
+        .main-content {
+            margin-top: 20px;
+            width: 50%;
+            background: grey;
+            height: 220px;
+            margin-left: 5px;
+            margin-top: 20px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<header class="content-default"> <h1>This is header </h1></header>
+<div class="container">
+    <nav class="content-default"> <h1>This is navigation  </h1></nav>
+    <div class="content">
+        <div class = "sub-content">
+            <section class="content-default"><h2>This is section</h2></section>
+            <article class="content-default"> <h2>This is article</h2></article>
+        </div>
+        <div class="main-content content-default">
+            <p>This is main content</p>
+        </div>
+        <aside class="content-default"><h2>This is aside</h2></aside>
+    </div>
+    <div class="content">
+        <div class = "sub-content">
+            <section class="content-default"><h2>This is section</h2></section>
+            <article class="content-default"> <h2>This is article</h2></article>
+        </div>
+        <div class="main-content content-default">
+            <p>This is main content</p>
+        </div>
+        <aside class="content-default"><h2>This is aside</h2></aside>
+    </div>
+    <div class="content">
+    <div class = "sub-content">
+        <section class="content-default"><h2>This is section</h2></section>
+        <article class="content-default"> <h2>This is article</h2></article>
+    </div>
+    <div class="main-content content-default">
+        <p>This is main content</p>
+    </div>
+    <aside class="content-default"><h2>This is aside</h2></aside>
+</div>
+    <footer class="content-default"><h1>This is footer</h1></footer>
+</div>
+
+</body>
+</html>
