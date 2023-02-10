@@ -20,7 +20,8 @@
 <p>
     <a href="/Product">Back to product list</a>
 </p>
-<form method="post">
+<form action="/Product" method="post">
+    <input type="hidden" name="action" value="create">
     <fieldset>
         <legend>Product information</legend>
         <table>

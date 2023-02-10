@@ -28,6 +28,7 @@ public class ProductServlet extends HttpServlet {
                 showDeleteForm(request, response);
                 break;
             case "view":
+                viewProduct(request, response);
                 break;
             default:
                 listProducts(request, response);
@@ -46,11 +47,13 @@ public class ProductServlet extends HttpServlet {
                 createProduct(request, response);
                 break;
             case "edit":
-                updateCustomer(request, response);
+                updateProduct(request, response);
                 break;
             case "delete":
-                deleteCustomer(request, response);
+                deleteProduct(request, response);
                 break;
+            case "search":
+                searchProduct(request, response);
             default:
                 break;
         }
@@ -79,6 +82,7 @@ public class ProductServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
+
     private void createProduct(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("name");
         String cost = request.getParameter("cost");
@@ -92,6 +96,26 @@ public class ProductServlet extends HttpServlet {
         a.save(product);
         RequestDispatcher dispatcher = request.getRequestDispatcher("product/create.jsp");
         request.setAttribute("message", "New product was created");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void searchProduct(HttpServletRequest request, HttpServletResponse response){
+        String name = request.getParameter("name");
+        ProductServiceImpl a = new ProductServiceImpl();
+        List<Product> result = a.findByName(name);
+        if(result.size() == 0){
+            System.out.println("KO co ket qua");
+        } else {
+            System.out.println("Co ket qua");
+        }
+        request.setAttribute("products",result);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("product/list.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException e) {
@@ -120,7 +144,7 @@ public class ProductServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-    private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) {
+    private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
         ProductServiceImpl a = new ProductServiceImpl();
 
         int id = Integer.parseInt(request.getParameter("id"));
@@ -157,7 +181,7 @@ public class ProductServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-    private void updateCustomer(HttpServletRequest request, HttpServletResponse response) {
+    private void updateProduct(HttpServletRequest request, HttpServletResponse response) {
         ProductServiceImpl a = new ProductServiceImpl();
 
         int id = Integer.parseInt(request.getParameter("id"));
@@ -180,6 +204,26 @@ public class ProductServlet extends HttpServlet {
             request.setAttribute("product", product);
             request.setAttribute("message", "Product information was updated");
             dispatcher = request.getRequestDispatcher("product/edit.jsp");
+        }
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void viewProduct(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        ProductServiceImpl a = new ProductServiceImpl();
+
+        Product product = a.findById(id);
+        RequestDispatcher dispatcher;
+        if(product == null){
+            dispatcher = request.getRequestDispatcher("error-404.jsp");
+        } else {
+            request.setAttribute("product", product);
+            dispatcher = request.getRequestDispatcher("product/view.jsp");
         }
         try {
             dispatcher.forward(request, response);

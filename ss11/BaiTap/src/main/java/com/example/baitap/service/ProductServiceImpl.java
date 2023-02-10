@@ -35,8 +35,15 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product findByName(String name) {
-        return products.get(name);
+    public List<Product> findByName(String name) {
+
+        List<Product> productList = findAll();
+        List<Product> results = new ArrayList<>();
+        for (Product product : productList) {
+            if (product.getName().equals(name))
+                results.add(product);
+        }
+        return results;
     }
 
     @Override
@@ -48,4 +55,5 @@ public class ProductServiceImpl implements ProductService{
     public void remove(int id) {
         products.remove(id);
     }
+
 }
