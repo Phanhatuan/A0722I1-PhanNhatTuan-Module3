@@ -54,6 +54,7 @@ public class ProductServlet extends HttpServlet {
                 break;
             case "search":
                 searchProduct(request, response);
+                break;
             default:
                 break;
         }
