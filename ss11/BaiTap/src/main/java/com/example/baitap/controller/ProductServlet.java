@@ -1,6 +1,7 @@
 package com.example.baitap.controller;
 
 import com.example.baitap.model.Product;
+import com.example.baitap.service.ProductService;
 import com.example.baitap.service.ProductServiceImpl;
 
 import javax.servlet.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @WebServlet(name = "ProductServlet ", value = "/Product")
 public class ProductServlet extends HttpServlet {
+    private ProductService productService = new ProductServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -110,11 +112,6 @@ public class ProductServlet extends HttpServlet {
         String name = request.getParameter("name");
         ProductServiceImpl a = new ProductServiceImpl();
         List<Product> result = a.findByName(name);
-        if(result.size() == 0){
-            System.out.println("KO co ket qua");
-        } else {
-            System.out.println("Co ket qua");
-        }
         request.setAttribute("products",result);
         RequestDispatcher dispatcher = request.getRequestDispatcher("product/list.jsp");
         try {

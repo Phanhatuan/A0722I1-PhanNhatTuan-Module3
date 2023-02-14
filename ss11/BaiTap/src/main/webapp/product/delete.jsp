@@ -15,8 +15,8 @@
 <p>
     <a href="/Product">Back to product list</a>
 </p>
-<form action="/Product" method="post">
-    <input type="hidden" name="action" value="delete">
+<form  method="post">
+    <input type="hidden"  name="action" value="delete">
     <h3>Are you sure?</h3>
     <fieldset>
         <legend>Product information</legend>

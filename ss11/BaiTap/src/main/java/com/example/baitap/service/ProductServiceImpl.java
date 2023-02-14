@@ -36,7 +36,6 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public List<Product> findByName(String name) {
-
         List<Product> productList = findAll();
         List<Product> results = new ArrayList<>();
         for (Product product : productList) {
