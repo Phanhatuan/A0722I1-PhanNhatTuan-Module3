@@ -21,5 +21,5 @@ public interface IUserDAO {
      boolean editUserProcedure(User user) throws SQLException;
 
      void deleteUserProcedure(int id) throws SQLException;
-
+     void addUserTransaction(User user, int[] permision);
 }
